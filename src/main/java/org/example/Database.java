@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Database {
 
-    private Connection conn;
+    private static Connection conn;
 
     public Database() {
 
@@ -48,5 +48,39 @@ public class Database {
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    // Delete car by car name
+    public static void DeleteCar(String make){
+        String sql = "DELETE FROM cars WHERE make = ?";
+        try {
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1,make);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void UpdateCar(String make, String newMake){
+
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:sample.db");
+
+            String sql = "UPDATE cars SET make = ? WHERE make = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, newMake);
+            pstmt.setString(2, make);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
