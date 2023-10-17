@@ -55,6 +55,7 @@ public class Main {
                     // Print all information
                     case 4:
                         Database.FetchCars();
+                        break;
 
                     case 5:
                         loop = false;
@@ -67,21 +68,7 @@ public class Main {
                 System.out.println("Write a number next time");
             }
 
-
         }
-
-        /*
-        // result if the method to save the new car object worked or not
-        var res = db.saveCar(myVolvo);
-
-        if (res){
-            System.out.println("Car saved");
-        } else {
-            System.out.println("Car not saved");
-        } */
-
-        // Removes the car based on the make
-        //Database.DeleteCar("Volvo");
 
 
 
