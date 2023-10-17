@@ -18,6 +18,7 @@ public class Main {
                 Scanner scanner = new Scanner(System.in);
                 int inputOption = scanner.nextInt();
 
+
                 switch (inputOption){
                     // Add a new car
                     case 1:
@@ -37,19 +38,19 @@ public class Main {
                         break;
                     // Update a car
                     case 2:
-                        System.out.println("Make: ");
-                        String makeToChange = scanner.next();
+                        System.out.println("ID: ");
+                        int idToChange = scanner.nextInt();
                         System.out.println("New make: ");
                         String newMake = scanner.next();
 
-                        Database.UpdateCar(makeToChange, newMake);
+                        Database.UpdateCar(idToChange, newMake);
                         break;
 
                     // Delete a car by its make
                     case 3:
-                        System.out.println("Make: ");
-                        String makeToDelete = scanner.next();
-                        Database.DeleteCar(makeToDelete);
+                        System.out.println("Id: ");
+                        int intToDelete = scanner.nextInt();
+                        Database.DeleteCar(intToDelete);
                         break;
 
                     // Print all information
@@ -69,7 +70,6 @@ public class Main {
             }
 
         }
-
 
 
     }

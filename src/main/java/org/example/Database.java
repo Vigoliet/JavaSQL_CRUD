@@ -28,7 +28,6 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-
     public boolean saveCar(Car car){
         String sql = "INSERT INTO cars(make, model, year) VALUES (?, ?, ?)";
 
@@ -49,15 +48,14 @@ public class Database {
         }
         return result;
     }
-
     // Delete car by car name
-    public static void DeleteCar(String make){
-        String sql = "DELETE FROM cars WHERE make = ?";
+    public static void DeleteCar(int id){
+        String sql = "DELETE FROM cars WHERE id = ?";
         try {
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1,make);
+            pstmt.setInt(1,id);
             pstmt.executeUpdate();
 
 
@@ -65,24 +63,22 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-
-    public static void UpdateCar(String make, String newMake){
+    public static void UpdateCar(int id, String newMake){
 
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:sample.db");
 
-            String sql = "UPDATE cars SET make = ? WHERE make = ?";
+            String sql = "UPDATE cars SET make = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, newMake);
-            pstmt.setString(2, make);
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
     public static void FetchCars(){
 
         try {
