@@ -78,6 +78,29 @@ public class Database {
             pstmt.setString(2, make);
             pstmt.executeUpdate();
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void FetchCars(){
+
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:sample.db");
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT id,make,model,year FROM cars";
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String make = rs.getString("make");
+                String model = rs.getString("model");
+                int year = rs.getInt("year");
+
+                System.out.println("Id:" + id + " Make:" + make + " Model:" + model + " Year:" + year);
+            }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

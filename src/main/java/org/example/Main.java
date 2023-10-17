@@ -13,7 +13,8 @@ public class Main {
                         "(1) Add a new car\n" +
                         "(2) Update a car\n" +
                         "(3) Delete a car\n" +
-                        "(4) Exit program\n");
+                        "(4) Print all cars\n" +
+                        "(5) Exit program\n");
                 Scanner scanner = new Scanner(System.in);
                 int inputOption = scanner.nextInt();
 
@@ -51,7 +52,11 @@ public class Main {
                         Database.DeleteCar(makeToDelete);
                         break;
 
+                    // Print all information
                     case 4:
+                        Database.FetchCars();
+
+                    case 5:
                         loop = false;
                         break;
                     default:
