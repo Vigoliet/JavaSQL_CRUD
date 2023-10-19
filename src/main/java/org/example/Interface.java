@@ -42,8 +42,12 @@ public class Interface {
                         int idToChange = scanner.nextInt();
                         System.out.println("New make: ");
                         String newMake = scanner.next();
+                        System.out.println("New model: ");
+                        String newModel = scanner.next();
+                        System.out.println("New year: ");
+                        int newYear = scanner.nextInt();
 
-                        Database.UpdateCar(idToChange, newMake);
+                        Database.UpdateCar(idToChange, newMake, newModel, newYear);
                         break;
 
                     // Delete a car by its id

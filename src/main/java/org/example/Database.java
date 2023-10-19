@@ -1,6 +1,7 @@
 package org.example;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -63,16 +64,18 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-    public static void UpdateCar(int id, String newMake){
+    public static void UpdateCar(int id, String newMake, String newModel, int newYear){
 
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:sample.db");
 
-            String sql = "UPDATE cars SET make = ? WHERE id = ?";
+            String sql = "UPDATE cars SET make = ?, model = ?, year =? WHERE i4d = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, newMake);
-            pstmt.setInt(2, id);
+            pstmt.setString(2, newModel);
+            pstmt.setInt(3, newYear);
+            pstmt.setInt(4, id);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -102,4 +105,36 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+
+    public ArrayList<Car> getCars(){
+        String sql = "SELECT * FROM cars"; // * Gets all columns
+
+        ArrayList<Car> cars = null; // Create list outside of try catch so we can return it
+
+        try {
+            // Prepare and execute our database query
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            cars = new ArrayList<>(); // Set cars to an empty list
+
+            while(rs.next()){ // For every row (car)
+
+                // Get all properties
+                int id = rs.getInt("id");
+                String make = rs.getString("make");
+                String model = rs.getString("model");
+                int year = rs.getInt("year");
+
+                Car car = new Car(id, make, model, year); // Create new car object
+
+                cars.add(car); // Add our car object in the list
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return cars; // Returns all cars (if it worked) or null (if not)
+    }
+
+
 }
