@@ -69,7 +69,7 @@ public class Database {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:sample.db");
 
-            String sql = "UPDATE cars SET make = ?, model = ?, year =? WHERE i4d = ?";
+            String sql = "UPDATE cars SET make = ?, model = ?, year =? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, newMake);
